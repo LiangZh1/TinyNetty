@@ -1,8 +1,8 @@
 package zh1.liang.tiny.netty.channel;
 
-import zh1.liang.tiny.netty.util.concurrent.promise.Future;
-import zh1.liang.tiny.netty.util.concurrent.promise.GenericFutureListener;
-import zh1.liang.tiny.netty.util.concurrent.promise.Promise;
+import zh1.liang.tiny.netty.util.concurrent.Future;
+import zh1.liang.tiny.netty.util.concurrent.GenericFutureListener;
+import zh1.liang.tiny.netty.util.concurrent.Promise;
 
 /**
  * @author: zhe.liang

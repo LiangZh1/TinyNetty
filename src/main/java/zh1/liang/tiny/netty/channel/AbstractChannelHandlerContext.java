@@ -1,7 +1,6 @@
 package zh1.liang.tiny.netty.channel;
 
 import lombok.extern.slf4j.Slf4j;
-
 import zh1.liang.tiny.netty.util.Attribute;
 import zh1.liang.tiny.netty.util.AttributeKey;
 import zh1.liang.tiny.netty.util.concurrent.EventExecutor;

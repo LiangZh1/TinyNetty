@@ -1,6 +1,6 @@
 package zh1.liang.tiny.netty.channel;
 
-import zh1.liang.tiny.netty.util.concurrent.promise.GenericFutureListener;
+import zh1.liang.tiny.netty.util.concurrent.GenericFutureListener;
 
 /**
  * @author: zhe.liang

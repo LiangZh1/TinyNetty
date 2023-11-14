@@ -2,7 +2,6 @@ package zh1.liang.tiny.netty.bootstrap;
 
 import lombok.extern.slf4j.Slf4j;
 import zh1.liang.tiny.netty.channel.*;
-import zh1.liang.tiny.netty.channel.ChannelOption;
 import zh1.liang.tiny.netty.util.AttributeKey;
 import zh1.liang.tiny.netty.util.internal.ObjectUtil;
 

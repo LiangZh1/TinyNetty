@@ -1,9 +1,9 @@
 package zh1.liang.tiny.netty.channel;
 
+import zh1.liang.tiny.netty.util.concurrent.DefaultPromise;
 import zh1.liang.tiny.netty.util.concurrent.EventExecutor;
-import zh1.liang.tiny.netty.util.concurrent.promise.DefaultPromise;
-import zh1.liang.tiny.netty.util.concurrent.promise.Future;
-import zh1.liang.tiny.netty.util.concurrent.promise.GenericFutureListener;
+import zh1.liang.tiny.netty.util.concurrent.Future;
+import zh1.liang.tiny.netty.util.concurrent.GenericFutureListener;
 
 import static zh1.liang.tiny.netty.util.internal.ObjectUtil.checkNotNull;
 

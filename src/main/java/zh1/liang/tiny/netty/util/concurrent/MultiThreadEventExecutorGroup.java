@@ -1,8 +1,5 @@
 package zh1.liang.tiny.netty.util.concurrent;
 
-import zh1.liang.tiny.netty.util.concurrent.AbstractEventExecutorGroup;
-import zh1.liang.tiny.netty.util.concurrent.EventExecutor;
-
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;

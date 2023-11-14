@@ -22,7 +22,6 @@ public interface ChannelInboundHandler extends ChannelHandler{
 
     void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception;
 
-
     void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception;
 
 

@@ -1,7 +1,5 @@
 package zh1.liang.tiny.netty.util.concurrent;
 
-import zh1.liang.tiny.netty.util.concurrent.EventExecutorGroup;
-
 import java.util.concurrent.TimeUnit;
 
 /**

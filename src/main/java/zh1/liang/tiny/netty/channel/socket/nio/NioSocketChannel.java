@@ -1,8 +1,8 @@
 package zh1.liang.tiny.netty.channel.socket.nio;
 
 import zh1.liang.tiny.netty.channel.Channel;
-import zh1.liang.tiny.netty.channel.nio.AbstractNioByteChannel;
 import zh1.liang.tiny.netty.channel.ChannelOption;
+import zh1.liang.tiny.netty.channel.nio.AbstractNioByteChannel;
 import zh1.liang.tiny.netty.channel.socket.DefaultSocketChannelConfig;
 import zh1.liang.tiny.netty.channel.socket.SocketChannelConfig;
 import zh1.liang.tiny.netty.util.internal.SocketUtils;
