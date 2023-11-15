@@ -270,20 +270,24 @@ public abstract class AbstractChannelHandlerContext implements ChannelHandlerCon
 
     @Override
     public ChannelHandlerContext fireChannelRead(final Object msg) {
-        invokeChannelRead(findContextInbound(ChannelHandlerMask.MASK_CHANNEL_READ), msg);
+        AbstractChannelHandlerContext nextContext = findContextInbound(ChannelHandlerMask.MASK_CHANNEL_READ);
+        invokeChannelRead(nextContext, msg);
         return this;
     }
 
-    static void invokeChannelRead(final AbstractChannelHandlerContext next, Object msg) {
+    /**
+     * 这个方法目前感觉只是为了封装一下线程池的选择逻辑
+     */
+    static void invokeChannelRead(final AbstractChannelHandlerContext context, Object msg) {
         final Object m = msg;
-        EventExecutor executor = next.executor();
+        EventExecutor executor = context.executor();
         if (executor.inEventLoop(Thread.currentThread())) {
-            next.invokeChannelRead(m);
+            context.invokeChannelRead(m);
         } else {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    next.invokeChannelRead(m);
+                    context.invokeChannelRead(m);
                 }
             });
         }
@@ -787,7 +791,7 @@ public abstract class AbstractChannelHandlerContext implements ChannelHandlerCon
     private AbstractChannelHandlerContext findContextInbound(int mask) {
         AbstractChannelHandlerContext ctx = this;
         do {
-            //为什么获取后一个？因为是入站处理器，数据从前往后传输
+            //入站处理器，数据从前往后传输
             ctx = ctx.next;
         } while ((ctx.executionMask & mask) == 0);
         return ctx;

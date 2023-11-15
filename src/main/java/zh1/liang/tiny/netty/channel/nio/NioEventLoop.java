@@ -131,11 +131,11 @@ public class NioEventLoop extends SingleThreadEventLoop {
         Iterator<SelectionKey> i = selectedKeys.iterator();
         for (;;) {
             final SelectionKey k = i.next();
-            final Object a = k.attachment();
+            final Object mayChannel = k.attachment();
             i.remove();
             //处理就绪事件
-            if (a instanceof AbstractNioChannel) {
-                processSelectedKey(k,(AbstractNioChannel) a);
+            if (mayChannel instanceof AbstractNioChannel) {
+                processSelectedKey(k,(AbstractNioChannel) mayChannel);
             }
             if (!i.hasNext()) {
                 break;
@@ -170,14 +170,13 @@ public class NioEventLoop extends SingleThreadEventLoop {
      */
     private void processSelectedKey(SelectionKey k,AbstractNioChannel ch) throws Exception {
         try {
-            //获取Unsafe类
+            //channel关联的 Unsafe类
             final AbstractNioChannel.NioUnsafe unsafe = ch.unsafe();
             //得到key感兴趣的事件
             int ops = k.interestOps();
             //如果是连接事件
             if (ops == SelectionKey.OP_CONNECT) {
-                //移除连接事件，否则会一直通知，这里实际上是做了个减法。位运算的门道，我们会放在之后和线程池的状态切换一起讲
-                //这里先了解就行
+                //移除连接事件，否则会一直通知，这里实际上是做了个减法。
                 ops &= ~SelectionKey.OP_CONNECT;
                 //重新把感兴趣的事件注册一下
                 k.interestOps(ops);
