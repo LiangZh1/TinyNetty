@@ -1,4 +1,4 @@
-package demo.threadlocal;
+package demo.threadlocal.test;
 /**
  * @author: zhe.liang
  * @create: 2023-10-17 15:27

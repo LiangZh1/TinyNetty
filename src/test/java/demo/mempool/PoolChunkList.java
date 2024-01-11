@@ -1,9 +1,8 @@
 package demo.mempool;
 
-public class PoolChunkList<T> {
+import demo.mempool.bytebuf.PooledByteBuf;
 
-    //该链表中的头节点
-    private PoolChunk<T> head;
+public class PoolChunkList<T> {
 
     //PoolChunkList按照使用率从低到高再组成一个List
     //PoolChunkList也会和其他的PoolChunkList构成链表，所以这里得到下一个PoolChunkList的指针
@@ -11,6 +10,11 @@ public class PoolChunkList<T> {
 
     //PoolChunkList也会和其他的PoolChunkList构成链表，所以这里得到前一个PoolChunkList的指针
     private PoolChunkList<T> prevList;
+
+
+    //该链表中的头节点
+    private PoolChunk<T> head;
+
 
 
     //该list内每一个Chunk的最小内存利用率
@@ -34,6 +38,9 @@ public class PoolChunkList<T> {
         maxCapacity = calculateMaxCapacity(minUsage, chunkSize);
     }
 
+    public void prevList(PoolChunkList prevList){
+        this.prevList = prevList;
+    }
 
 
 //     * @Description:该方法可以得到每一个Chunk可以分配的最大内存值
@@ -58,17 +65,17 @@ public class PoolChunkList<T> {
      * @Description:分配内存的方法
      * 多了一个参数reqCapacity，就是要分配的内存大小
      */
-    boolean allocate(int reqCapacity) {
+    boolean allocate(PooledByteBuf<T> buf,int reqCapacity) {
         //如果要申请的内存超过了一个Chunk可分配的最大内存值
-        if (normCapacity > maxCapacity) {
+        //TODO
+        if (reqCapacity > maxCapacity) {
             //分配不了就直接退出
             return false;
         }
         //便遍历该链表中的Chunk
         for (PoolChunk<T> cur = head; cur != null; cur = cur.next) {
-            //从Chunk中分配经过规整的内存，具体的方法都在PoolChunk中，这里我们知识粗讲逻辑
-            //核心会在PoolChunk中讲到
-            if (cur.allocate(reqCapacity)) {
+            //从Chunk中分配经过规整的内存，具体的方法都在PoolChunk中
+            if (cur.allocate(buf,reqCapacity)) {
                 //这里就会判断当前分配完内存的Chunk的内存利用率是否超过了它的最大内存利用率
                 if (cur.usage() >= maxUsage) {
                     //超过了就从当前链表中移除该Chunk
